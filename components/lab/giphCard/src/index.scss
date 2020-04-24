@@ -1,0 +1,36 @@
+@import '~@s-ui/theme/lib/index';
+
+$bdw-lab-giphcard: 1px !default;
+$bdc-lab-giphcard: #eee !default;
+$bds-lab-giphcard: solid !default;
+
+.sui-LabGiphCard {
+  display: flex;
+  flex-direction: column;
+  border-width: $bdw-lab-giphcard;
+  border-color: $bdc-lab-giphcard;
+  border-style: $bds-lab-giphcard;
+  padding: 10px;
+
+  &-image {
+    display: block;
+    object-fit: cover;
+  }
+
+  &-content {
+    display: flex;
+    align-items: center;
+  }
+
+  @media (min-width: 480px) {
+    flex-direction: row;
+
+    &-image {
+      max-width: 200px;
+    }
+
+    &-content {
+      padding: 0 0 0 15px;
+    }
+  }
+}
