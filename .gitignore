@@ -1,0 +1,12 @@
+node_modules/
+public/
+lib/
+npm-debug.log
+lib
+.env
+demo/**/**/themes
+.tern-port
+.DS_Store
+.npmrc
+.vscode/
+*/**/package-lock.json

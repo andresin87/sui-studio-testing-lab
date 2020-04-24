@@ -1,0 +1,68 @@
+{
+  "name": "sui-studio-testing-lab",
+  "version": "1.0.0",
+  "description": "Mono repo, multi package containing all SUI components.",
+  "private": true,
+  "scripts": {
+    "build": "sui-mono phoenix --no-root --ci && npm run install:demos -- --ci && npm run install:themes && sui-studio build",
+    "check:release": "sui-studio check-release",
+    "co": "sui-studio commit",
+    "commitmsg": "validate-commit-msg",
+    "dev": "sui-studio dev",
+    "generate": "sui-studio generate -S s-ui -P react",
+    "lint": "npm run lint:js && npm run lint:sass",
+    "lint:js": "sui-lint js",
+    "lint:sass": "sui-lint sass",
+    "install:demos": "cd demo && sui-mono phoenix",
+    "install:themes": "node scripts/build-themes.js",
+    "phoenix": "sui-mono phoenix && npm run install:demos -- --no-audit",
+    "precommit": "sui-precommit run",
+    "release": "sui-studio release",
+    "start": "sui-studio start",
+    "test": "true"
+  },
+  "repository": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@s-ui/helpers": "1",
+    "@s-ui/mono": "1",
+    "@s-ui/precommit": "2",
+    "@s-ui/studio": "7",
+    "fs-extra": "8.1.0",
+    "globby": "10.0.1",
+    "husky": "0.13.4",
+    "validate-commit-msg": "2.12.2",
+    "walker": "1.0.7"
+  },
+  "dependencies": {
+    "@s-ui/component-dependencies": "1"
+  },
+  "config": {
+    "sui-studio": {
+      "font": "https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i",
+      "name": "SUIComponents"
+    },
+    "sui-mono": {
+      "access": "public",
+      "packagesFolder": "components",
+      "deepLevel": 2
+    },
+    "validate-commit-msg": {
+      "types": "@s-ui/mono/src/types"
+    }
+  },
+  "commit-msg": [
+    "validate-commit-msg"
+  ],
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/@s-ui/lint/eslintrc.js"
+    ]
+  },
+  "stylelint": {
+    "extends": "./node_modules/@s-ui/lint/stylelint.config.js"
+  },
+  "prettier": "./node_modules/@s-ui/lint/.prettierrc.js"
+}

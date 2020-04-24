@@ -1,1 +1,0 @@
-# sui-studio-testing-lab
