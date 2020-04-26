@@ -9,6 +9,14 @@ import {render} from '@testing-library/react'
 
 chai.use(chaiDOM)
 
+const setup = (props = {}) => {
+  const container = document.createElement('div')
+  container.setAttribute('id', 'test-container')
+  return render(<LabGiphCard {...props} />, {
+    container: document.body.appendChild(container)
+  })
+}
+
 describe('LabGiphCard', () => {
   it('should render without crashing', () => {
     // Given
@@ -28,13 +36,13 @@ describe('LabGiphCard', () => {
     const props = {}
 
     // When
-    const {container} = render(<LabGiphCard {...props} />)
+    const {container} = setup(props)
 
     // Then
     expect(container).to.not.be.null
   })
 
-  it('should render text and image', () => {
+  it('should render text and image', async () => {
     // Given
     const props = {
       url: 'https://media1.giphy.com/media/Ok8r4XMtqTj3O/giphy.gif',
@@ -42,20 +50,7 @@ describe('LabGiphCard', () => {
     }
 
     // When
-    const {container, debug, ...otherTools} = render(<LabGiphCard {...props} />)
-    /** Priority [otherTools]
-     * - Queries Accessible to Everyone:
-     *      getByLabelText,
-     *      getByPlaceholderText,
-     *      getByRole,
-     *      getByText,
-     *      getByDisplayValue
-     * - Semantic Queries:
-     *      getByAltText,
-     *      getByTitle
-     * - Test IDs:
-     *      getByTestId
-     * **/
+    const {container, debug, ...otherTools} = setup(props)
     const {getByText, getByAltText} = otherTools
 
     // Then
