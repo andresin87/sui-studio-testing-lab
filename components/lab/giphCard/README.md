@@ -2,6 +2,8 @@
 
 > Description
 
+[demo](https://codesandbox.io/s/adevinta-spain-live-test-coding-rafa-ypiul?file=/src/getGiphUseCase.js)
+
 <!-- ![](./assets/preview.png) -->
 
 ## Installation
