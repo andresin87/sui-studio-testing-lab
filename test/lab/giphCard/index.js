@@ -1,13 +1,17 @@
 /* global LabGiphCard */
+/* global MouseEvent */
 
 import React from 'react'
 import ReactDOM from 'react-dom'
 
 import chai, {expect} from 'chai'
+import sinon from 'sinon'
+import sinonChai from 'sinon-chai'
 import chaiDOM from 'chai-dom'
-import {render} from '@testing-library/react'
+import {render, fireEvent} from '@testing-library/react'
 
 chai.use(chaiDOM)
+chai.use(sinonChai)
 
 const setup = (props = {}) => {
   const element = document.createElement('div')
@@ -96,5 +100,44 @@ describe('LabGiphCard', () => {
     expect(getByText(nextProps.text).innerText).to.be.equal(nextProps.text)
     expect(getByAltText(nextProps.text).alt).to.be.equal(nextProps.text)
     expect(getByAltText(nextProps.text).src).to.be.equal(nextProps.url)
+  })
+
+  it('should fire onClickHandler event once', async () => {
+    // Given
+    const spy = sinon.spy()
+    const props = {
+      url: 'https://media1.giphy.com/media/Ok8r4XMtqTj3O/giphy.gif',
+      text: "I don't need debug my code I USE TDD",
+      handleOnClick: spy
+    }
+
+    // When
+    const {getByText, getByAltText} = setup(props)
+
+    // Then
+    expect(spy).to.have.callCount(0)
+
+    // And
+    // When
+    fireEvent(
+      getByText(props.text),
+      new MouseEvent('click', {
+        bubbles: true, // if true, then the event bubbles.
+        cancelable: true // if true, then the “default action” may be prevented
+      })
+    )
+
+    // Then
+    expect(spy).to.have.callCount(0)
+
+    // But
+    // When
+    fireEvent.click(getByAltText(props.text))
+
+    // Then
+    expect(spy).to.have.callCount(1)
+
+    // Usage of assertions
+    // https://www.chaijs.com/plugins/sinon-chai/
   })
 })
