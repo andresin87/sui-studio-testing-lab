@@ -7,11 +7,11 @@ const LabGiphCard = function({url, text, handleOnClick}) {
       <img
         src={url}
         alt={text}
-        className="t-GiphCard-image"
+        className="sui-GiphCard-image"
         onClick={handleOnClick}
       />
-      <div className="t-GiphCard-content">
-        <p className="t-GiphCard-text">{text}</p>
+      <div className="sui-GiphCard-content">
+        <p className="sui-GiphCard-text">{text}</p>
       </div>
     </aside>
   )
