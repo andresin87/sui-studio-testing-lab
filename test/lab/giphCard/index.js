@@ -9,6 +9,14 @@ import {render} from '@testing-library/react'
 
 chai.use(chaiDOM)
 
+const setup = (props = {}) => {
+  const element = document.createElement('div')
+  element.setAttribute('id', 'test-container')
+  return render(<LabGiphCard {...props} />, {
+    container: document.body.appendChild(element)
+  })
+}
+
 describe('LabGiphCard', () => {
   it('should render without crashing', () => {
     // Given
@@ -28,7 +36,7 @@ describe('LabGiphCard', () => {
     const props = {}
 
     // When
-    const {container} = render(<LabGiphCard {...props} />)
+    const {container} = setup(props)
 
     // Then
     expect(container).to.not.be.null
@@ -42,7 +50,7 @@ describe('LabGiphCard', () => {
     }
 
     // When
-    const {container, debug, ...otherTools} = render(<LabGiphCard {...props} />)
+    const {container, debug, ...otherTools} = setup(props)
     /** Priority [otherTools]
      * - Queries Accessible to Everyone:
      *      getByLabelText,
