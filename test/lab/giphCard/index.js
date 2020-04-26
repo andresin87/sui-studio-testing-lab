@@ -50,13 +50,36 @@ describe('LabGiphCard', () => {
     }
 
     // When
-    const {container, debug, ...otherTools} = setup(props)
-    const {getByText, getByAltText} = otherTools
+    const {
+      rerender,
+      getByText,
+      queryByText,
+      getByAltText,
+      queryByAltText
+    } = setup(props)
 
     // Then
-    console.log(debug()) // Debug usage 😏
     expect(getByText(props.text).innerText).to.be.equal(props.text)
     expect(getByAltText(props.text).alt).to.be.equal(props.text)
     expect(getByAltText(props.text).src).to.be.equal(props.url)
+
+    // But
+    // Given
+    const nextProps = {
+      url: 'https://media1.giphy.com/media/l6TD7USKX0QIo/giphy.gif',
+      text: 'I need to debug my code now'
+    }
+
+    // When
+    await rerender(<LabGiphCard {...nextProps} />)
+
+    // Then
+    expect(queryByText(props.text)).to.be.null
+    expect(queryByAltText(props.text)).to.be.null
+
+    // And
+    expect(getByText(nextProps.text).innerText).to.be.equal(nextProps.text)
+    expect(getByAltText(nextProps.text).alt).to.be.equal(nextProps.text)
+    expect(getByAltText(nextProps.text).src).to.be.equal(nextProps.url)
   })
 })
