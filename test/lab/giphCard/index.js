@@ -73,7 +73,7 @@ describe('LabGiphCard', () => {
     } = otherTools
 
     // Then
-    console.log(debug()) // Debug usage 😏
+    // console.log(debug()) // Debug usage 😏
     expect(getByText(props.text).innerText).to.be.equal(props.text)
     expect(getByAltText(props.text).alt).to.be.equal(props.text)
     expect(getByAltText(props.text).src).to.be.equal(props.url)
