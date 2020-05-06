@@ -260,4 +260,10 @@ describe('LabGiphCard', () => {
       // https://www.chaijs.com/plugins/sinon-chai/
     })
   })
+
+  // Remembering why we test	  describe.context.default('context', (LabGiphCard, setup) => {
+  // We write tests to be confident that our application will work when the USER uses them.	    it('should render without crashing', () => {
+  // Think less about the code you are testing and more about the use cases that code supports.	      // Given
+  //   Code Coverage < Use Case Coverage (Kent C.Dots "How to know what to test" Apr.2019)	      const props = {}
+  // <!-- Wrong KPIs can encourage developers to simply increase "vanity" metrics --> (Alex Lobera "Testing is all about principles" Dic.2019)
 })
