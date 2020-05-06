@@ -40,7 +40,8 @@ describe('LabGiphCard', () => {
     const {container} = setup(props)
 
     // Then
-    expect(container).to.not.be.null
+    expect(container.innerHTML).to.be.a('string')
+    expect(container.innerHTML).to.not.have.lengthOf(0)
   })
 
   it('should render text and image', async () => {
@@ -160,7 +161,8 @@ describe('LabGiphCard', () => {
       const {container} = setup(props)
 
       // Then
-      expect(container).to.not.be.null
+      expect(container.innerHTML).to.be.a('string')
+      expect(container.innerHTML).to.not.have.lengthOf(0)
     })
 
     it('should render text and image', async () => {
