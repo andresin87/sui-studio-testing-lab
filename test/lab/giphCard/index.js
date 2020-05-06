@@ -21,12 +21,14 @@ describe('LabGiphCard', () => {
   const setup = generateSetup(LabGiphCard)
   it('should render without crashing', () => {
     // Given
+    const props = {}
 
     // When
+    const component = <LabGiphCard {...props} />
 
     // Then
     const div = document.createElement('div')
-    ReactDOM.render(LabGiphCard, div)
+    ReactDOM.render(component, div)
     ReactDOM.unmountComponentAtNode(div)
   })
 
@@ -139,12 +141,14 @@ describe('LabGiphCard', () => {
   describe.context.default('context', (LabGiphCard, setup) => {
     it('should render without crashing', () => {
       // Given
+      const props = {}
 
       // When
+      const component = <LabGiphCard {...props} />
 
       // Then
       const div = document.createElement('div')
-      ReactDOM.render(LabGiphCard, div)
+      ReactDOM.render(component, div)
       ReactDOM.unmountComponentAtNode(div)
     })
 
