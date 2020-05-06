@@ -4,7 +4,7 @@ import React from 'react'
 import SUIContext from '@s-ui/react-context'
 import withContext from '@s-ui/studio/src/components/demo/HoC/withContext'
 import hoistNonReactStatics from 'hoist-non-react-statics'
-import {render} from '@testing-library/react';
+import {render} from '@testing-library/react'
 
 const global = globalThis || window // eslint-disable-line
 const __CONTEXTS__ = global.__STUDIO_CONTEXTS__ || {}
@@ -14,7 +14,7 @@ const __COMPONENT__ = global.__STUDIO_COMPONENT__
   if (global.generateSetup) {
     return
   }
-  global.generateSetup = (Component = __COMPONENT__) => (props = {})=> {
+  global.generateSetup = (Component = __COMPONENT__) => (props = {}) => {
     const element = document.createElement('div')
     element.setAttribute('id', 'test-container')
 
@@ -22,7 +22,7 @@ const __COMPONENT__ = global.__STUDIO_COMPONENT__
       container: document.body.appendChild(element)
     })
   }
-}).call()
+}.call())
 
 const functionsToPatch = ['describe']
 
@@ -45,7 +45,7 @@ functionsToPatch.forEach(fnName => {
       if (!__CONTEXTS__) {
         // eslint-disable-next-line
         console.error(
-            `You're trying to use the context ${prop} but it's not defined in your contexts.js file`
+          `You're trying to use the context ${prop} but it's not defined in your contexts.js file`
         )
         return function(title, cb) {
           return originalFn(title, cb)
@@ -56,7 +56,7 @@ functionsToPatch.forEach(fnName => {
       if (!context) {
         // eslint-disable-next-line
         console.error(
-            `Your trying to use the context ${prop} but it is not define in your contexts.js file.
+          `Your trying to use the context ${prop} but it is not define in your contexts.js file.
           Only are allow the following contexts: ${Object.keys(__CONTEXTS__)}.
           as fallback you will use the "default" context in your test`
         )
@@ -65,20 +65,21 @@ functionsToPatch.forEach(fnName => {
       }
 
       const EnhanceComponentWithLegacyContext = withContext(
-          context,
-          context
+        context,
+        context
       )(__COMPONENT__)
       const EnhanceComponent = props => (
-          <SUIContext.Provider value={context}>
-            <EnhanceComponentWithLegacyContext {...props} />
-          </SUIContext.Provider>
+        <SUIContext.Provider value={context}>
+          <EnhanceComponentWithLegacyContext {...props} />
+        </SUIContext.Provider>
       )
       hoistNonReactStatics(EnhanceComponent, EnhanceComponentWithLegacyContext)
 
-
-
       return function(title, cb) {
-        return originalFn(`[${prop}] ${title}`, cb.partial(EnhanceComponent, generateSetup(EnhanceComponent)))
+        return originalFn(
+          `[${prop}] ${title}`,
+          cb.partial(EnhanceComponent, global.generateSetup(EnhanceComponent))
+        )
       }
     }
   }
